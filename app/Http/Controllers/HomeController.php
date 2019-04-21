@@ -29,7 +29,7 @@ class HomeController extends Controller
         if($user->type=='p'){
             return redirect('/finddoctor');
         }elseif($user->type=='d'){
-            return redirect('/') ;
+            return redirect('/profile') ;
         }elseif($user->type=='a'){
             return redirect('/admin') ;
         }

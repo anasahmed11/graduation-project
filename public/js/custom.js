@@ -471,5 +471,251 @@ $(function(){
 
 
 })
+/* ------------------------------------------------------------- doctor views --------------------------------------------------------*/
+/* ------------------- doctor----------------- */
+$(document).on('click',"#new-doctor-add",function(e){
+    var doctorform=$('#add-doctor-form').serialize();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: 'admin',
+        data: new FormData($("#add-doctor-form")[0]),
+        dataType:'json',
+        async:false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if((data.errors)){
+                $(".alert-success").show();
+                $(".alert-success").addClass("alert-danger");
+                $(".alert-danger").html("error please fill all inputs ,try again");
+            }else{
+                $(".alert-success").show();
+                $(".alert-success").html('success');
+                alert('success');
+            }
+            $('#add-doctor-form').trigger("reset");
+            $(".alert-success").load(" .alert-success");
+            $(".alert-danger").load(" .alert-danger");
+        }
+
+    });
+    e.preventDefault();
+
+
+});
+$(".edit-doctor").click(function(){
+    $("#doc-name-edit").val($(this).data('name'));
+    $("#doc-email-edit").val($(this).data('email'));
+    $("#address-edit").val($(this).data('address'));
+    $("#certificates-edit").val($(this).data('cert'));
+    doctorid=$(this).data('id');
+});
+
+$(document).on('click',"#new-doctor-edit",function(e){
+    var doctorform=$('#edit-doctor-form').serialize();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: 'profile/'+doctorid,
+        data: new FormData($("#edit-doctor-form")[0]),
+        dataType:'json',
+        async:false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if((data.errors)){
+                $(".alert-success").show();
+                $(".alert-success").addClass("alert-danger");
+                $(".alert-danger").html("error please fill all inputs ,try again");
+            }else{
+                $(".alert-success").show();
+                $(".alert-success").html('success');
+                alert('success');
+            }
+            $('#add-doctor-form').trigger("reset");
+            $(".alert-success").load(" .alert-success");
+            $(".alert-danger").load(" .alert-danger");
+        }
+
+    });
+    e.preventDefault();
+
+
+});
+
+
+/* ------------------- price 1----------------- */
+$(".set-price1").click(function(){
+    doctor1id=$(this).data('id');
+});
+
+$(document).on('click',"#set-price1",function(e){
+    var price1form=$('#set-price1-form').serialize();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: 'price/'+doctor1id,
+        data: new FormData($("#set-price1-form")[0]),
+        dataType:'json',
+        async:false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if((data.errors)){
+                $(".alert-success").show();
+                $(".alert-success").addClass("alert-danger");
+                $(".alert-danger").html("error please fill all inputs ,try again");
+            }else{
+                $(".alert-success").show();
+                $(".alert-success").html('success');
+                alert('success');
+            }
+            $('#set-price1-form').trigger("reset");
+            $(".alert-success").load(" .alert-success");
+            $(".alert-danger").load(" .alert-danger");
+        }
+
+    });
+    e.preventDefault();
+
+
+});
+
+
+/* ------------------- price 2----------------- */
+$(".set-price2").click(function(){
+    doctor2id=$(this).data('id');
+});
+
+$(document).on('click',"#set-price2",function(e){
+    var price2form=$('#set-price2-form').serialize();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: 'price2/'+doctor2id,
+        data: new FormData($("#set-price2-form")[0]),
+        dataType:'json',
+        async:false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if((data.errors)){
+                $(".alert-success").show();
+                $(".alert-success").addClass("alert-danger");
+                $(".alert-danger").html("error please fill all inputs ,try again");
+            }else{
+                $(".alert-success").show();
+                $(".alert-success").html('success');
+                alert('success');
+            }
+            $('#set-price2-form').trigger("reset");
+            $(".alert-success").load(" .alert-success");
+            $(".alert-danger").load(" .alert-danger");
+        }
+
+    });
+    e.preventDefault();
+
+
+});
+
+/* ------------------- price 1----------------- */
+$(".edit-price1").click(function(){
+    edoctor1id=$(this).data('id');
+});
+
+$(document).on('click',"#edit-price1",function(e){
+    var eprice1form=$('#edit-price1-form').serialize();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: 'price-edit/'+edoctor1id,
+        data: new FormData($("#edit-price1-form")[0]),
+        dataType:'json',
+        async:false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if((data.errors)){
+                $(".alert-success").show();
+                $(".alert-success").addClass("alert-danger");
+                $(".alert-danger").html("error please fill all inputs ,try again");
+            }else{
+                $(".alert-success").show();
+                $(".alert-success").html('success');
+                alert('success');
+            }
+            $('#set-price2-form').trigger("reset");
+            $(".alert-success").load(" .alert-success");
+            $(".alert-danger").load(" .alert-danger");
+        }
+
+    });
+    e.preventDefault();
+
+
+});
+
+/* ------------------- price 1----------------- */
+$(".edit-price2").click(function(){
+    edoctor2id=$(this).data('id');
+});
+
+$(document).on('click',"#edit-price2",function(e){
+    var eprice2form=$('#edit-price2-form').serialize();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: 'price-edit2/'+edoctor2id,
+        data: new FormData($("#edit-price2-form")[0]),
+        dataType:'json',
+        async:false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if((data.errors)){
+                $(".alert-success").show();
+                $(".alert-success").addClass("alert-danger");
+                $(".alert-danger").html("error please fill all inputs ,try again");
+            }else{
+                $(".alert-success").show();
+                $(".alert-success").html('success');
+                alert('success');
+            }
+            $('#set-price2-form').trigger("reset");
+            $(".alert-success").load(" .alert-success");
+            $(".alert-danger").load(" .alert-danger");
+        }
+
+    });
+    e.preventDefault();
+
+
+});
 
 

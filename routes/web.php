@@ -18,7 +18,7 @@ Auth::routes();
 Route::get('/start', 'HomeController@index');
 Route::get('/finddoctor','ViewsController@patientindex');
 Route::get('/blog','ViewsController@blog');
-Route::get('/admin','ViewsController@admin_index')->middleware('auth');
+Route::get('/admin','DoctorsController@index')->middleware('auth');
 Route::resource('views','ViewsController');
 Auth::routes();
 
@@ -90,3 +90,17 @@ Route::post('/blog-page/{id}','BlogsController@update');
 Route::delete('/blog-page/{id}','BlogsController@destroy');
 Route::post('/blog-page','BlogsController@store');
 
+/* doctor */
+Route::resource('doctor','DoctorsController');
+Route::post('/admin','DoctorsController@store');
+
+/* doctor views */
+Route::get('/profile','DoctorsController@profile');
+Route::post('/profile/{id}','DoctorsController@update');
+
+/* doctor prices */
+Route::resource('price','VisitPricesController');
+Route::post('/price/{id}','VisitPricesController@store');
+Route::post('/price2/{id}','VisitPricesController@store_price');
+Route::post('/price-edit/{id}','VisitPricesController@update');
+Route::post('/price-edit2/{id}','VisitPricesController@update_price');

@@ -75,7 +75,7 @@ class RegisterController extends Controller
         $patient->u_id=$user->id;
         $patient->name=$data['name'];
         $patient->email=$data['email'];
-        $patient->password=$data['email'];
+        $patient->password=Hash::make($data['password']);
         $patient->age=$data['age'];
         $patient->phone=$data['phone'];
         $patient->save();

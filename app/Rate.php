@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rate extends Model
 {
-    //
+    public $timestamps = false;
+    protected $primaryKey = 'd_id';
 }
