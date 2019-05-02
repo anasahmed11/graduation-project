@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ url('/css/animate.css') }}">
     <link href="{{ url('/css/simple-sidebar.css') }}" rel="stylesheet">
     <link href="{{ url('css/dashstyle.css') }}" rel="stylesheet">
+    <script src="http://maps.google.com/maps/api/js?sensor=false"
+            type="text/javascript"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 </head>
@@ -31,8 +33,8 @@
         <div class="overlay"></div>
         <div class="sidebar-heading">THERAPO </div>
         <div class="list-group list-group-flush">
-            <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-search-location"></i> Find doctor</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-map-marked-alt"></i> Search in map</a>
+            <a href="{{url('/find-doctor')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-search-location"></i> Find doctor</a>
+            <a href="{{url('/find-map')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-map-marked-alt"></i> Search in map</a>
             <a href="#" class="list-group-item list-group-item-action bg-light"><i class="far fa-clock"></i> My bookings</a>
             <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-history"></i> My History</a>
         </div>
@@ -121,7 +123,7 @@
             $("#wrapper").toggleClass("toggled");
         });
     </script>
-    <script src="{{ url('/js/custom.js') }}"></script>
+    <script src="{{ url('/js/patient-functions.js') }}"></script>
 
 </body>
 </html>

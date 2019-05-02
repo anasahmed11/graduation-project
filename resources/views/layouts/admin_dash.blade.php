@@ -34,7 +34,7 @@
             <a href="{{ url('/blog-page') }}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-clipboard"></i> Blogs page</a>
             <a href="{{ url('/visit-method') }}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-map-marked-alt"></i> visit_methods</a>
             <a href="{{ url('/payment-method') }}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-credit-card"></i>payment_methods</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-search-location"></i> locations</a>
+            <a href="{{ url('/locations') }}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-search-location"></i> locations</a>
             <a href="{{ url('/categories') }}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-history"></i> categories</a>
             <a href="{{ url('/client-review') }}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-retweet"></i> client-reviews</a>
         </div>

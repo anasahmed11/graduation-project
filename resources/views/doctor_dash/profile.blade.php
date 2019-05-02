@@ -64,6 +64,18 @@
                     </div>
                     </div>
                     <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @foreach($locations as $location)
+                                    @if($location->d_id == Auth::user()->id)
+                                        <div id="map" data-id="{{$location->d_id}}" data-name="{{$location->name}}" data-long="{{$location->long}}" data-lat="{{$location->lat}}"></div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
                     <div class="row">
                         <div class="col-md-6 offset-3">
                             <button class="edit-doctor btn btn-block btn-success"  data-toggle="modal" data-target="#edit-modal-doc" data-id="{{ $doctor->u_id }}" data-name="{{ $doctor->name }}" data-email="{{ $doctor->email }}" data-photo="{{ $doctor->photo }}" data-cert="{{ $doctor->Certificates }}" data-address="{{ $doctor->address }}">Edit Profile</button>

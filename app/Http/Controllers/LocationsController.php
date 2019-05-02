@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Location;
+use App\Doctor;
+use Illuminate\Support\Facades\Input;
+use Response;
+use Validator;
 class LocationsController extends Controller
 {
     /**
@@ -11,9 +15,21 @@ class LocationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $rules =
+        [
+            'name' => 'required|',
+            'long' => 'required|numeric',
+            'lat' => 'required|numeric',
+            'd_id' => 'required|numeric',
+        ];
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
-        //
+        $locations=Location::all();
+        return view('admin_dash/locations')->with('locations',$locations);
     }
 
     /**
@@ -34,7 +50,24 @@ class LocationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(Input::all(), $this->rules);
+        if ($validator->fails()) {
+            return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
+        }else{
+            $doctor_id = Doctor::find($request->input('d_id'));
+            if($doctor_id){
+                $location=new Location();
+                $location->name = $request->input('name');
+                $location->long = $request->input('long');
+                $location->lat = $request->input('lat');
+                $location->d_id = $request->input('d_id');
+                $location->save();
+                return response()->json($location);
+            }else{
+                $location='doctor not found in doctor table';
+                return response()->json($location);
+            }
+        }
     }
 
     /**
@@ -68,7 +101,24 @@ class LocationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make(Input::all(), $this->rules);
+        if ($validator->fails()) {
+            return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
+        }else{
+            $doctor_id = Doctor::find($request->input('d_id'));
+            if($doctor_id){
+                $location=Location::find($id);
+                $location->name = $request->input('name');
+                $location->long = $request->input('long');
+                $location->lat = $request->input('lat');
+                $location->d_id = $request->input('d_id');
+                $location->save();
+                return response()->json($location);
+            }else{
+                $location='doctor not found in doctor table';
+                return response()->json($location);
+            }
+        }
     }
 
     /**

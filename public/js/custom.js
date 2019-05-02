@@ -468,9 +468,134 @@ $(function(){
 
 
     });
+    /* ------------------- blog----------------- */
+    $(document).on('click',"#new-location",function(e){
+        var locationform=$('#add-location-form').serialize();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: 'locations',
+            data: new FormData($("#add-location-form")[0]),
+            dataType:'json',
+            async:false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if((data.errors)){
+                    $(".alert-success").show();
+                    $(".alert-success").addClass("alert-danger");
+                    $(".alert-danger").html("error please fill all inputs ,try again");
+                }else{
+                    if(data.name==undefined){
+                        $(".alert-success").show();
+                        $(".alert-success").addClass("alert-danger");
+                        $(".alert-danger").html("this doctor id not found in doctors table");
+                    }
+                    else{
+                        $(".alert-success").show();
+                        $(".alert-success").html('success');
+                        $(".method-table").append("<tr class='location-"+data.id+"'>"+
+                            "<td>"+data.id+"</td>"+
+                            "<td>"+data.name+"</td>"+
+                            "<td>"+data.long+"</td>"+
+                            "<td>"+data.lat+"</td>"+
+                            "<td>"+data.d_id+"</td>"+
+                            "<td><button class='edit-location btn btn-success'  data-toggle='modal' data-target='#edit-modal-location' data-id='" + data.id + "' data-name='" + data.name + "' data-long='" + data.long + "' data-lat='"+ data.lat + "'  data-doctor='"+ data.d_id + "'>update</button></td>"
+                            +
+                            "<td><button class='delete-location btn btn-danger'  data-id='" + data.id +  "' >Delete</button></td>"
+                            +
+                            "</tr>")
+                    }
+
+                }
+                $('#add-location-form').trigger("reset");
+                $(".alert-success").load(" .alert-success");
+                $(".alert-danger").load(" .alert-danger");
+            }
+
+        });
+        e.preventDefault();
+
+
+    });
+    $(document).on('click',".delete-location",function(e) {
+        var location_id=$(this).data('id');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'DELETE',
+            url: 'locations/'+location_id,
+            processData: false,
+            success: function () {
+                $(".location-"+location_id).remove();
+            }
+        });
+        e.preventDefault();
+    });
+    $(".edit-location").click(function(){
+        $("#name-edit").val($(this).data('name'));
+        $("#long-edit").val($(this).data('long'));
+        $("#lat-edit").val($(this).data('lat'));
+        $("#d_id-edit").val($(this).data('doctor'));
+        locationid=$(this).data('id');
+    });
+    $(document).on('click',"#edit-location",function(e){
+        var blogform=$('#edit-location-form').serialize();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: 'locations/'+locationid,
+            data: new FormData($("#edit-location-form")[0]),
+            dataType:'json',
+            async:false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if((data.errors)){
+                    $(".alert-success").show();
+                    $(".alert-success").addClass("alert-danger");
+                    $(".alert-danger").html("error please fill all inputs ,try again");
+                }else{
+                    $(".alert-success").show();
+                    $(".alert-success").html('success');
+                    $(".location-"+locationid).replaceWith("<tr class='location-"+data.id+"'>"+
+                        "<td>"+data.id+"</td>"+
+                        "<td>"+data.name+"</td>"+
+                        "<td>"+data.long+"</td>"+
+                        "<td>"+data.lat+"</td>"+
+                        "<td>"+data.d_id+"</td>"+
+                        "<td><button class='edit-location btn btn-success'  data-toggle='modal' data-target='#edit-modal-location' data-id='" + data.id + "' data-name='" + data.name + "' data-long='" + data.long + "' data-lat='"+ data.lat + "'  data-doctor='"+ data.d_id + "'>update</button></td>"
+                        +
+                        "<td><button class='delete-location btn btn-danger'  data-id='" + data.id +  "' >Delete</button></td>"
+                        +
+                        "</tr>")
+                }
+                $(".alert-success").load(" .alert-success");
+                $(".alert-danger").load(" .alert-danger");
+            }
+        });
+        e.preventDefault();
+
+
+    });
+
+
 
 
 })
+
+
 /* ------------------------------------------------------------- doctor views --------------------------------------------------------*/
 /* ------------------- doctor----------------- */
 $(document).on('click',"#new-doctor-add",function(e){
@@ -717,5 +842,20 @@ $(document).on('click',"#edit-price2",function(e){
 
 
 });
+function initMap() {
 
+        myLatLng ={lat: parseFloat($("#map").attr('data-lat')), lng: parseFloat($("#map").attr('data-long'))};
+
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: myLatLng
+    });
+
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'Hello World!'
+    });
+}
 

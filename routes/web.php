@@ -16,7 +16,6 @@ Route::get('/','ViewsController@index');
 Auth::routes();
 /* main views */
 Route::get('/start', 'HomeController@index');
-Route::get('/finddoctor','ViewsController@patientindex');
 Route::get('/blog','ViewsController@blog');
 Route::get('/admin','DoctorsController@index')->middleware('auth');
 Route::resource('views','ViewsController');
@@ -42,10 +41,6 @@ Route::post('/contact-us','ReviewsController@store');
 Route::resource('reviews','ReviewsController');
 /* end contact-us controllers */
 
-/* find doctor controllers */
-Route::get('/finddoctor','ViewsController@patient_index')->middleware('auth');
-Route::resource('views','ViewsController');
-/* end find doctor controllers */
 
 /* visit method */
 Route::get('/visit-method','VisitMethodsController@index')->middleware('auth');
@@ -104,3 +99,15 @@ Route::post('/price/{id}','VisitPricesController@store');
 Route::post('/price2/{id}','VisitPricesController@store_price');
 Route::post('/price-edit/{id}','VisitPricesController@update');
 Route::post('/price-edit2/{id}','VisitPricesController@update_price');
+
+/* locations */
+Route::resource('locations','LocationsController');
+Route::get('/locations','LocationsController@index');
+Route::post('/locations','LocationsController@store');
+Route::post('/locations/{id}','LocationsController@update');
+
+/*patient views*/
+/*find-doctor*/
+Route::get('/find-doctor','DoctorsController@find_doctor');
+/*find map*/
+Route::get('/find-map','DoctorsController@map_index');

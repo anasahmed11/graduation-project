@@ -21,7 +21,7 @@ class VisitPricesController extends Controller
     use RegistersUsers;
     protected $rules =
         [
-            'price' => 'required',
+            'price' => 'required|numeric',
         ];
     public function index()
     {
