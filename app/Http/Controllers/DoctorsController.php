@@ -68,6 +68,15 @@ class DoctorsController extends Controller
         $locations=Location::all();
         return view('patient_dash/finddoctor')->with('doctors',$doctors)->with('rates',$rates)->with('prices',$prices)->with('methods',$methods)->with('locations',$locations);
     }
+    public function doctors_api()
+    {
+        $doctors=Doctor::all();
+        $rates=Rate::all();
+        $prices=VisitPrice::all();
+        $methods=VisitMethod::all();
+        $locations=Location::all();
+        return view('patient_dash/finddoctor')->with('doctors',$doctors)->with('rates',$rates)->with('prices',$prices)->with('methods',$methods)->with('locations',$locations);
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -86,14 +86,16 @@
             <div class="modal-body">
                 {{Form::open(array('id'=>'book-form'))}}
                 {{ Form::hidden('d_id', '', ['class' => 'form-control','id'=>'visit-doc-id']) }}
-                {{ Form::hidden('p_id', '', ['class' => 'form-control','id'=>'visit-patient-id']) }}
+                {{ Form::hidden('p_id', Auth::user()->id, ['class' => 'form-control','id'=>'visit-patient-id']) }}
+                {{Form::label('type', 'type')}}
+                {{Form::select('type_id', array('1' => 'Ordinary Visit', '2' => 'Video Chat'),null, array('class' => 'form-control','id'=>'type-id'))}}<br>
                 {{Form::label('date', 'date')}}
                 {{ Form::date('date', '', ['class' => 'form-control','id'=>'visit-date'])}}<br>
-                {{Form::label('date', 'date')}}
-                {{ Form::time('date', '', ['class' => 'form-control','id'=>'visit-date'])}}<br>
-                {{Form::label('city', 'city')}}
-                {{Form::text('address','',['class' => 'form-control','id'=>'address-edit'])}}<br>
-                {{Form::submit('save changes',['class' => 'btn btn-primary btn-lg btn-block','id'=>'new-doctor-edit'])}}
+                {{Form::label('time', 'time')}}
+                {{Form::select('time', array('160000' => '4 pm to 5 pm', '170000' => '5 pm to 6 pm','180000' => '6 pm to 7 pm','190000' => '7 pm to 8 pm','200000' => '8 pm to 9 pm','210000' => '9 pm to 10 pm','220000' => '10 pm to 11 pm','230000' => '11 pm to 12 am'),null, array('class' => 'form-control','id'=>'visit-date'))}}<br>
+                {{Form::label('payment', 'payment')}}
+                {{Form::select('pay_id', array('1' => 'Vodafone Cash', '2' => 'Fawry'),null, array('class' => 'form-control','id'=>'pay-id'))}}<br>
+                {{Form::button('<i class="fas fa-stethoscope"></i> book',['type'=>'submit','class' => 'btn btn-block btn-book','id'=>'book-now'])}}
                 {{ Form::close() }}
                 <br>
                 <div class="met alert alert-success">

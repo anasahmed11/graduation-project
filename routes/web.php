@@ -109,5 +109,10 @@ Route::post('/locations/{id}','LocationsController@update');
 /*patient views*/
 /*find-doctor*/
 Route::get('/find-doctor','DoctorsController@find_doctor');
+
 /*find map*/
 Route::get('/find-map','DoctorsController@map_index');
+
+/*visit*/
+Route::resource('visits','VisitsController');
+Route::post('/find-doctor','VisitsController@store');

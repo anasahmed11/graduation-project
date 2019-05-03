@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         if($user->type=='p'){
-            return redirect('/finddoctor');
+            return redirect('/find-doctor');
         }elseif($user->type=='d'){
             return redirect('/profile') ;
         }elseif($user->type=='a'){

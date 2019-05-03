@@ -15,10 +15,7 @@ class ViewsController extends Controller
     {
         return view('index');
     }
-    public function admin_index()
-    {
-        return view('admin_dash/admin');
-    }
+
     public function doctor_request()
     {
         return view('newdoctor');

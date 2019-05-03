@@ -76,3 +76,43 @@ if(mm<10){
 today = yyyy+'-'+mm+'-'+dd;
 document.getElementById("visit-date").setAttribute("min", today);
 
+/* ------------------- visit----------------- */
+$(".book").click(function(){
+    $("#visit-doc-id").val($(this).data('id'));
+});
+
+$(document).on('click',"#book-now",function(e){
+    var visitform=$('#book-form').serialize();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: 'find-doctor',
+        data: new FormData($("#book-form")[0]),
+        dataType:'json',
+        async:false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if((data.errors)){
+                $(".alert-success").show();
+                $(".alert-success").addClass("alert-danger");
+                $(".alert-danger").html("error please fill all inputs ,try again");
+            }else{
+                $(".alert-success").show();
+                $(".alert-success").html('success');
+                alert('success');
+            }
+            $('#set-price2-form').trigger("reset");
+            $(".alert-success").load(" .alert-success");
+            $(".alert-danger").load(" .alert-danger");
+        }
+
+    });
+    e.preventDefault();
+
+
+});
