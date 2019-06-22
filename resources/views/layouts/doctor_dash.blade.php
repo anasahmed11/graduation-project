@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{{ url('/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ url('/sweetalert2/dist/sweetalert2.min.css') }}">
     <link href="{{ url('/css/simple-sidebar.css') }}" rel="stylesheet">
     <link href="{{ url('css/dashstyle.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -107,6 +108,7 @@
 <!-- end-color-setting -->
 
 <!-- Bootstrap core JavaScript -->
+<script src="{{ url('/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
 <script src="{{ url('/vendor/jquery/jquery.min.js') }}"></script>
 <!--    wow.js file-->
 <script src="{{ url('/js/wow.min.js') }}"></script>

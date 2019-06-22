@@ -6,7 +6,9 @@ use App\Rate;
 use App\User;
 use App\VisitPrice;
 use App\VisitMethod;
+use App\Visit;
 use App\Location;
+use Illuminate\Support\Facades\Auth;
 use Response;
 use DB;
 use Illuminate\Http\Request;
@@ -34,7 +36,8 @@ class DoctorsController extends Controller
         ];
     public function __construct()
     {
-        $this->middleware('auth');
+
+//        $this->middleware('auth');
     }
     public function index()
     {
@@ -66,17 +69,10 @@ class DoctorsController extends Controller
         $prices=VisitPrice::all();
         $methods=VisitMethod::all();
         $locations=Location::all();
-        return view('patient_dash/finddoctor')->with('doctors',$doctors)->with('rates',$rates)->with('prices',$prices)->with('methods',$methods)->with('locations',$locations);
+        $visits=Visit::all();
+        return view('patient_dash/finddoctor')->with('doctors',$doctors)->with('rates',$rates)->with('prices',$prices)->with('methods',$methods)->with('locations',$locations)->with('visits',$visits);
     }
-    public function doctors_api()
-    {
-        $doctors=Doctor::all();
-        $rates=Rate::all();
-        $prices=VisitPrice::all();
-        $methods=VisitMethod::all();
-        $locations=Location::all();
-        return view('patient_dash/finddoctor')->with('doctors',$doctors)->with('rates',$rates)->with('prices',$prices)->with('methods',$methods)->with('locations',$locations);
-    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -261,4 +257,38 @@ class DoctorsController extends Controller
             echo json_encode($data);
         }
     }
+    public function map_index_api()
+    {
+        $doctors=Doctor::all();
+        $rates=Rate::all();
+        $prices=VisitPrice::all();
+        $methods=VisitMethod::all();
+        $locations=Location::all();
+
+        return response()->json(array(
+            'doctors' => $doctors,
+            'rates' => $rates,
+            'prices' => $prices,
+            'methods' => $methods,
+            'locations' => $locations,
+        ));
+    }
+    public function find_doctor_api()
+    {
+        $doctors=Doctor::all();
+        $rates=Rate::all();
+        $prices=VisitPrice::all();
+        $methods=VisitMethod::all();
+        $locations=Location::all();
+        $visits=Visit::all();
+        return response()->json(array(
+            'doctors' => $doctors,
+            'rates' => $rates,
+            'prices' => $prices,
+            'methods' => $methods,
+            'locations' => $locations,
+            'visits' => $visits,
+        ));
+    }
 }
+

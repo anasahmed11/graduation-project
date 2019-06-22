@@ -11,12 +11,17 @@ $(function(){
             processData: false,
             success: function (data) {
                 if((data.errors)){
-                    $(".alert-success").show();
-                    $(".alert-success").addClass("alert-danger");
-                    $(".alert-danger").html("error please fill all inputs ,try again");
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Oops... , try again',
+                        text: 'Something went wrong ! fill all fields and try again',
+                    })
                 }else{
-                    $(".alert-success").show();
-                    $(".alert-success").html('success');
+                    Swal.fire(
+                        'Your request has been successfully sent !',
+                        'We will contact you soon',
+                        'success'
+                    )
                 }
                 $('#new-doctorreq-form').trigger("reset");
 
@@ -38,12 +43,17 @@ $(function(){
             processData: false,
             success: function (data) {
                 if((data.errors)){
-                    $(".alert-success").show();
-                    $(".alert-success").addClass("alert-danger");
-                    $(".alert-danger").html("error please fill all inputs ,try again");
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Oops...,try again',
+                        text: 'Something went wrong ! fill all fields and try again',
+                    })
                 }else{
-                    $(".alert-success").show();
-                    $(".alert-success").html('success');
+                    Swal.fire(
+                        'Thank You',
+                        'Your message has been successfully sent , we will try to solve your problems!',
+                        'success'
+                    )
                 }
                 $('#new-clientrev-form').trigger("reset");
 

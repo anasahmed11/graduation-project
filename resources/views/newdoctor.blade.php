@@ -48,9 +48,6 @@
                         {{Form::submit('Send Data',['class' => 'btn btn-lg btn-review','id'=>'new-doctor-req'])}}<br>
                         {{Form::close()}}
                         <br>
-                        <div class="dreq alert alert-success">
-
-                        </div>
                     </div>
                 </div>
             </div>

@@ -87,18 +87,14 @@ Route::post('/blog-page','BlogsController@store');
 
 /* doctor */
 Route::resource('doctor','DoctorsController');
-Route::post('/admin','DoctorsController@store');
+
 
 /* doctor views */
-Route::get('/profile','DoctorsController@profile');
-Route::post('/profile/{id}','DoctorsController@update');
 
-/* doctor prices */
+
+
 Route::resource('price','VisitPricesController');
-Route::post('/price/{id}','VisitPricesController@store');
-Route::post('/price2/{id}','VisitPricesController@store_price');
-Route::post('/price-edit/{id}','VisitPricesController@update');
-Route::post('/price-edit2/{id}','VisitPricesController@update_price');
+
 
 /* locations */
 Route::resource('locations','LocationsController');
@@ -107,11 +103,24 @@ Route::post('/locations','LocationsController@store');
 Route::post('/locations/{id}','LocationsController@update');
 
 /*patient views*/
-/*find-doctor*/
-Route::get('/find-doctor','DoctorsController@find_doctor');
 
-/*find map*/
-Route::get('/find-map','DoctorsController@map_index');
+Route::group(['middleware' => 'auth'], function () {
+    /*find-doctor*/
+    Route::get('/find-doctor','DoctorsController@find_doctor');
+    /* doctor prices */
+    Route::post('/price/{id}','VisitPricesController@store');
+    Route::post('/price2/{id}','VisitPricesController@store_price');
+    Route::post('/price-edit/{id}','VisitPricesController@update');
+    Route::post('/price-edit2/{id}','VisitPricesController@update_price');
+    /* doctor */
+    Route::get('/profile','DoctorsController@profile');
+    Route::post('/profile/{id}','DoctorsController@update');
+    Route::post('/admin','DoctorsController@store');
+    /*find map*/
+    Route::get('/find-map','DoctorsController@map_index');
+});
+
+
 
 /*visit*/
 Route::resource('visits','VisitsController');

@@ -41,9 +41,6 @@
                         {{Form::submit('Send Review',['class' => 'btn btn-review btn-lg','id'=>'new-client-rev'])}}<br>
                         {{Form::close()}}
                         <br>
-                        <div class="dreq alert alert-success">
-
-                        </div>
                     </div>
                 </div>
             </div>

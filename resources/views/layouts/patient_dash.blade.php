@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{{ url('/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ url('/sweetalert2/dist/sweetalert2.min.css') }}">
     <link href="{{ url('/css/simple-sidebar.css') }}" rel="stylesheet">
     <link href="{{ url('css/dashstyle.css') }}" rel="stylesheet">
     <script src="http://maps.google.com/maps/api/js?sensor=false"
@@ -109,6 +110,7 @@
     <!-- end-color-setting -->
 
     <!-- Bootstrap core JavaScript -->
+    <script src="{{ url('/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
     <script src="{{ url('/vendor/jquery/jquery.min.js') }}"></script>
     <!--    wow.js file-->
     <script src="{{ url('/js/wow.min.js') }}"></script>

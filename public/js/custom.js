@@ -658,17 +658,20 @@ $(document).on('click',"#new-doctor-edit",function(e){
         processData: false,
         success: function (data) {
             if((data.errors)){
-                $(".alert-success").show();
-                $(".alert-success").addClass("alert-danger");
-                $(".alert-danger").html("error please fill all inputs ,try again");
+                Swal.fire({
+                    type: 'error',
+                    title: 'Oops... , try again',
+                    text: 'error in update ! fill all fields and try again',
+                })
             }else{
-                $(".alert-success").show();
-                $(".alert-success").html('success');
-                alert('success');
+                Swal.fire(
+                    'Done',
+                    'profile updated successfully',
+                    'success'
+                )
             }
             $('#add-doctor-form').trigger("reset");
-            $(".alert-success").load(" .alert-success");
-            $(".alert-danger").load(" .alert-danger");
+
         }
 
     });

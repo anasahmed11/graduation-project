@@ -80,7 +80,9 @@ document.getElementById("visit-date").setAttribute("min", today);
 $(".book").click(function(){
     $("#visit-doc-id").val($(this).data('id'));
 });
-
+$(document).on('click',"#send-date",function(e){
+     gg=$("#visit-date").val();
+});
 $(document).on('click',"#book-now",function(e){
     var visitform=$('#book-form').serialize();
     $.ajaxSetup({
@@ -98,17 +100,20 @@ $(document).on('click',"#book-now",function(e){
         processData: false,
         success: function (data) {
             if((data.errors)){
-                $(".alert-success").show();
-                $(".alert-success").addClass("alert-danger");
-                $(".alert-danger").html("error please fill all inputs ,try again");
+                Swal.fire({
+                    type: 'error',
+                    title: 'Oops... , try again',
+                    text: 'Booking was not done ! fill all fields and try again',
+                })
             }else{
-                $(".alert-success").show();
-                $(".alert-success").html('success');
-                alert('success');
+                Swal.fire(
+                    'Booking successful!',
+                    'Please pay by this number , 0128 686 4229',
+                    'success'
+                )
             }
-            $('#set-price2-form').trigger("reset");
-            $(".alert-success").load(" .alert-success");
-            $(".alert-danger").load(" .alert-danger");
+            $('#book-form').trigger("reset");
+
         }
 
     });

@@ -24,7 +24,7 @@
             <div class="col-md-7 offset-1 wow fadeInDown"data-wow-duration="2s" data-wow-offset="300">
                 <div class="blog">
                 <div class="home-img img-ajx">
-                    <img src="{{url('/uploads/1554503255.jpeg')}}"  width="100%" class="img-responsive" alt="html5 bootstrap template">
+                    <img src="{{url('/uploads/person-woman-apple-hotel.jpg')}}"  width="100%" class="img-responsive" alt="html5 bootstrap template">
                 </div>
                 <div class="h-desc desc desc-ajx wow fadeInUp"data-wow-duration="2s" data-wow-offset="300">
                     <h2>click on any button</h2><br>

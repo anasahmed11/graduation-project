@@ -12,6 +12,7 @@
     <!--    bootstrap-->
     <link rel="stylesheet" href="{{ url('/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url('/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ url('/sweetalert2/dist/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet"href="{{ url('/css/style.css') }}">
 </head>
@@ -76,6 +77,7 @@
 </div>
 <!-- end main -->
 <!-- scripts -->
+<script src="{{ url('/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
 <script src="{{ url('/js/html5shiv.min.js') }}"></script>
 <script src="{{ url('/js/jquery/jquery-2.2.4.min.js') }}"></script>
 <script src="{{ url('/js/bootstrap.min.js') }}"></script>
