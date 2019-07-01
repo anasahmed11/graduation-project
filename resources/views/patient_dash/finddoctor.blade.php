@@ -8,7 +8,7 @@
                 <h2 >{{$doctor->name}}</h2>
                 @foreach($rates as $rate)
                     @if($doctor->u_id == $rate->d_id )
-                        @if($rate->rate <=5 )
+                        @if($rate->rate/$rate->times <=5 )
                             <span>
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
@@ -73,7 +73,7 @@
         </div>
     </div>
 </div>
-<!-- see location Modal -->
+<!-- book Modal -->
 <div class="modal fade" id="book-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">

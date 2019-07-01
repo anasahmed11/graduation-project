@@ -61,20 +61,24 @@ $(".see-location").click(function initMap() {
 
 
 });
-/* make condition to visit date */
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth()+1; //January is 0!
-var yyyy = today.getFullYear();
-if(dd<10){
-    dd='0'+dd
-}
-if(mm<10){
-    mm='0'+mm
-}
 
-today = yyyy+'-'+mm+'-'+dd;
-document.getElementById("visit-date").setAttribute("min", today);
+/* make condition to visit date */
+$(function(){
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+
+    today = yyyy+'-'+mm+'-'+dd;
+    $("#visit-date").attr("min", today);
+});
+
 
 /* ------------------- visit----------------- */
 $(".book").click(function(){
@@ -103,12 +107,81 @@ $(document).on('click',"#book-now",function(e){
                 Swal.fire({
                     type: 'error',
                     title: 'Oops... , try again',
-                    text: 'Booking was not done ! fill all fields and try again',
+                    text: 'Booking was not done ! fill all fields and try again,may be the time you choose already reserved',
                 })
             }else{
                 Swal.fire(
                     'Booking successful!',
                     'Please pay by this number , 0128 686 4229',
+                    'success'
+                )
+            }
+            $('#book-form').trigger("reset");
+
+        }
+
+    });
+    e.preventDefault();
+
+
+});
+// booking view //
+$(".doctor-info").click(function initMap() {
+    doctorlat=parseFloat($(this).data('lat'));
+    doctorlong=parseFloat($(this).data('long'));
+    myLatLng ={lat: doctorlat, lng: doctorlong};
+
+
+    var map = new google.maps.Map(document.getElementById('doctor-map'), {
+        zoom: 12,
+        center: myLatLng
+    });
+
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'Hello World!'
+    });
+
+
+});
+// notes //
+$(document).on('click',".details",function(e){
+    $(".note-p").html("<h1>notes</h1>"+$(this).data('note'));
+    $(".drug-p").html("<h1>drugs</h1>"+$(this).data('drug'));
+});
+//rate//
+$(".rate").click(function(){
+    rate=$(this).data('rate');
+    d_id=$(this).data('id');
+    $("#doctor-times").val($(this).data('times')+1);
+});
+$(document).on('click',"#new-rate",function(e){
+    $("#doctor-rate").val((parseInt($("#doctor-rates").val())+rate));
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: 'history/'+d_id,
+        data: new FormData($("#rate-form")[0]),
+        dataType:'json',
+        async:false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if((data.errors)){
+                Swal.fire({
+                    type: 'error',
+                    title: "Oops... , try again",
+                    text: 'your rate not send successfully ! fill all fields and try again',
+                })
+            }else{
+                Swal.fire(
+                    'rating successful!',
+                    'your rate done',
                     'success'
                 )
             }

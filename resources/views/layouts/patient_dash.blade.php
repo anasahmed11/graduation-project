@@ -36,8 +36,8 @@
         <div class="list-group list-group-flush">
             <a href="{{url('/find-doctor')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-search-location"></i> Find doctor</a>
             <a href="{{url('/find-map')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-map-marked-alt"></i> Search in map</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light"><i class="far fa-clock"></i> My bookings</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-history"></i> My History</a>
+            <a href="{{url('/bookings')}}" class="list-group-item list-group-item-action bg-light"><i class="far fa-clock"></i> My bookings</a>
+            <a href="{{url('/history')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-history"></i> My History</a>
         </div>
     </div>
     <!-- /#sidebar-wrapper -->

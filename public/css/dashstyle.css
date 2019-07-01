@@ -324,3 +324,12 @@ a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover
     font-size: 15px;
     margin-right: 5px;
 }
+.btn-send{
+    background-color:rgb(55,187,166) ;
+    color: white;
+    transition: background-color 1s;
+}
+.btn-send:hover{
+    color: white;
+    background-color:#43978D ;
+}

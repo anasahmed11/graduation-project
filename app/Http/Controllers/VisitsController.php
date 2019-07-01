@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Doctor;
-use App\User;
-use App\VisitPrice;
+use App\PaymentMethod;
+use Carbon\Carbon;
+use App\VisitNote;
 use App\VisitMethod;
+use App\Patient;
 use App\Visit;
+use App\Location;
+use App\Rate;
 use Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -33,7 +37,104 @@ class VisitsController extends Controller
         ];
     public function index()
     {
-        //
+
+        $visits=Visit::where('date', '<=', Carbon::now())->get();
+        $doctors=Doctor::all();
+        $types=VisitMethod::all();
+        $methods=PaymentMethod::all();
+        $rates=Rate::all();
+        $notes=VisitNote::all();
+        return view('patient_dash/history')->with('doctors',$doctors)->with('rates',$rates)->with('methods',$methods)->with('types',$types)->with('visits',$visits)->with('notes',$notes);
+    }
+    public function index_api()
+    {
+
+        $visits=Visit::where('date', '<=', Carbon::now())->get();
+        $doctors=Doctor::all();
+        $types=VisitMethod::all();
+        $methods=PaymentMethod::all();
+        $rates=Rate::all();
+        $notes=VisitNote::all();
+        return response()->json(array(
+            'visits' => $visits,
+            'doctors' => $doctors,
+            'types' => $types,
+            'methods' => $methods,
+            'rates' => $rates,
+            'notes' => $notes,
+        ));
+    }
+    public function doctor_history()
+    {
+
+        $visits=Visit::where('date', '<=', Carbon::now())->get();
+        $patients=Patient::all();
+        $types=VisitMethod::all();
+        $methods=PaymentMethod::all();
+        return view('doctor_dash/my_history')->with('patients',$patients)->with('methods',$methods)->with('types',$types)->with('visits',$visits);
+    }
+    public function doctor_history_api()
+    {
+
+        $visits=Visit::where('date', '<=', Carbon::now())->get();
+        $patients=Patient::all();
+        $types=VisitMethod::all();
+        $methods=PaymentMethod::all();
+        return response()->json(array(
+            'visits' => $visits,
+            'patients' => $patients,
+            'types' => $types,
+            'methods' => $methods,
+        ));
+    }
+    public function booking_index()
+    {
+
+        $visits=Visit::where('date', '>=', Carbon::now())->get();
+        $doctors=Doctor::all();
+        $types=VisitMethod::all();
+        $locations=Location::all();
+        $methods=PaymentMethod::all();
+        return view('patient_dash/booking')->with('doctors',$doctors)->with('methods',$methods)->with('types',$types)->with('visits',$visits)->with('locations',$locations);
+    }
+    public function booking_index_api()
+    {
+
+        $visits=Visit::where('date', '>=', Carbon::now())->get();
+        $doctors=Doctor::all();
+        $types=VisitMethod::all();
+        $locations=Location::all();
+        $methods=PaymentMethod::all();
+        return response()->json(array(
+            'visits' => $visits,
+            'doctors' => $doctors,
+            'types' => $types,
+            'methods' => $methods,
+            'locations' => $locations,
+        ));
+    }
+    public function doctor_bookings()
+    {
+
+        $visits=Visit::where('date', '>=', Carbon::now())->get();
+        $patients=Patient::all();
+        $types=VisitMethod::all();
+        $methods=PaymentMethod::all();
+        return view('doctor_dash/my_bookings')->with('patients',$patients)->with('methods',$methods)->with('types',$types)->with('visits',$visits);
+    }
+    public function doctor_bookings_api()
+    {
+
+        $visits=Visit::where('date', '>=', Carbon::now())->get();
+        $patients=Patient::all();
+        $types=VisitMethod::all();
+        $methods=PaymentMethod::all();
+        return response()->json(array(
+            'visits' => $visits,
+            'patients' => $patients,
+            'types' => $types,
+            'methods' => $methods,
+        ));
     }
 
     /**
@@ -54,7 +155,16 @@ class VisitsController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make(Input::all(), $this->rules);
+        $validator = Validator::make(Input::all(), [
+            'd_id' => 'required|exists:doctors,u_id',
+            'p_id' => 'required|exists:patients,u_id',
+            'type_id' => 'required|exists:visit_methods,id',
+            'pay_id' => 'required|exists:payment_methods,id',
+            'date' => 'required|',
+            'time' => Rule::unique('visits')->where(function ($query) {
+                return $query->where('d_id',Input:: get('d_id'))->where('date', Input::get('date'));
+            })
+        ]);
         if ($validator->fails()) {
             return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
         }else{

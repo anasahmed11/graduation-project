@@ -33,8 +33,8 @@
         <div class="sidebar-heading">{{ Auth::user()->name }} </div>
         <div class="list-group list-group-flush">
             <a href="{{ url('/profile') }}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-user-md"></i> My Profile</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-history"></i> history</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light"><i class="far fa-clock"></i> My bookings</a>
+            <a href="{{ url('/my-history') }}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-history"></i> My history</a>
+            <a href="{{ url('/my-bookings') }}" class="list-group-item list-group-item-action bg-light"><i class="far fa-clock"></i> My bookings</a>
             <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-history"></i> statistics</a>
         </div>
     </div>

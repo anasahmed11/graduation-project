@@ -861,4 +861,44 @@ function initMap() {
         title: 'Hello World!'
     });
 }
+// note //
+$(".notes").click(function(){
+    $("#visit-id").val($(this).data('id'));
+});
+$(document).on('click',"#new-notes",function(e){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: 'my-history',
+        data: new FormData($("#notes-form")[0]),
+        dataType:'json',
+        async:false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if((data.errors)){
+                Swal.fire({
+                    type: 'error',
+                    title: 'Oops... , try again',
+                    text: 'notes was not done ! fill all fields and try again',
+                })
+            }else{
+                Swal.fire(
+                    'done',
+                    'notes added to this visit',
+                    'success'
+                )
+            }
+            $('#book-form').trigger("reset");
 
+        }
+
+    });
+    e.preventDefault();
+
+
+});

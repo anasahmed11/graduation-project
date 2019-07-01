@@ -9,7 +9,7 @@
                             <h2 class="wow fadeInUp" data-wow-duration="2s" data-wow-offset="300">{{$doctor->name}}</h2>
                             @foreach($rates as $rate)
                                 @if(Auth::user()->id == $rate->d_id )
-                                    @if($rate->rate <=5 )
+                                    @if($rate->rate/$rate->times <=5 )
                                         <span class=" wow flash"data-wow-duration="2s" data-wow-offset="300">
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>

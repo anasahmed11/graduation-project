@@ -94,7 +94,8 @@ Route::resource('doctor','DoctorsController');
 
 
 Route::resource('price','VisitPricesController');
-
+Route::resource('notes','VisitNotesController');
+Route::resource('rates','RatesController');
 
 /* locations */
 Route::resource('locations','LocationsController');
@@ -105,8 +106,7 @@ Route::post('/locations/{id}','LocationsController@update');
 /*patient views*/
 
 Route::group(['middleware' => 'auth'], function () {
-    /*find-doctor*/
-    Route::get('/find-doctor','DoctorsController@find_doctor');
+
     /* doctor prices */
     Route::post('/price/{id}','VisitPricesController@store');
     Route::post('/price2/{id}','VisitPricesController@store_price');
@@ -115,13 +115,23 @@ Route::group(['middleware' => 'auth'], function () {
     /* doctor */
     Route::get('/profile','DoctorsController@profile');
     Route::post('/profile/{id}','DoctorsController@update');
+    Route::get('/my-bookings','VisitsController@doctor_bookings');
+    Route::get('/my-history','VisitsController@doctor_history');
+    Route::post('/my-history','VisitNotesController@store');
     Route::post('/admin','DoctorsController@store');
+    /* ----------------- patient views --------------- */
     /*find map*/
     Route::get('/find-map','DoctorsController@map_index');
+    /*find-doctor*/
+    Route::get('/find-doctor','DoctorsController@find_doctor');
+    Route::get('/history','VisitsController@index');
+    Route::post('/history/{id}','RatesController@update');
+    Route::get('/bookings','VisitsController@booking_index');
+    Route::post('/find-doctor','VisitsController@store');
 });
 
 
 
 /*visit*/
 Route::resource('visits','VisitsController');
-Route::post('/find-doctor','VisitsController@store');
+
