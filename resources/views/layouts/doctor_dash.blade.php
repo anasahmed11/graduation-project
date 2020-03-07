@@ -35,7 +35,7 @@
             <a href="{{ url('/profile') }}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-user-md"></i> My Profile</a>
             <a href="{{ url('/my-history') }}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-history"></i> My history</a>
             <a href="{{ url('/my-bookings') }}" class="list-group-item list-group-item-action bg-light"><i class="far fa-clock"></i> My bookings</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light"><i class="fas fa-history"></i> statistics</a>
+            <a href="{{ url('/statistics/'.Auth::user()->id) }}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-history"></i> statistics</a>
         </div>
     </div>
     <!-- /#sidebar-wrapper -->

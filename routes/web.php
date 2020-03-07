@@ -119,6 +119,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/my-history','VisitsController@doctor_history');
     Route::post('/my-history','VisitNotesController@store');
     Route::post('/admin','DoctorsController@store');
+    Route::get('/statistics/{id}','VisitsController@statistics');
     /* ----------------- patient views --------------- */
     /*find map*/
     Route::get('/find-map','DoctorsController@map_index');

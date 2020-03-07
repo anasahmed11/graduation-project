@@ -55,17 +55,17 @@
                     </div>
                     <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 wow fadeInLeft" data-wow-duration="2s" data-wow-offset="300">
                             <button class="set-price1 btn btn-block btn-primary"  data-toggle="modal" data-target="#set-modal-1" data-id="{{ $doctor->u_id }}"  >Set Ordinary visit price</button><br>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 wow fadeInRight" data-wow-duration="2s" data-wow-offset="300">
                             <button class="set-price2 btn btn-block btn-primary"  data-toggle="modal" data-target="#set-modal-2" data-id="{{ $doctor->u_id }}"  >Set Video chat price</button><br>
                         </div>
                     </div>
                     </div>
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 wow fadeInDown" data-wow-duration="2s" data-wow-offset="300">
                                 @foreach($locations as $location)
                                     @if($location->d_id == Auth::user()->id)
                                         <div id="map" data-id="{{$location->d_id}}" data-name="{{$location->name}}" data-long="{{$location->long}}" data-lat="{{$location->lat}}"></div>

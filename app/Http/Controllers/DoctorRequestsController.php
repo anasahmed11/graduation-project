@@ -50,6 +50,7 @@ class DoctorRequestsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         $validator = Validator::make(Input::all(), $this->rules);
@@ -108,10 +109,5 @@ class DoctorRequestsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $doctor_r = DoctorRequest::find($id);
-        $doctor_r->delete();
-        return response()->json($doctor_r);
-    }
+
 }

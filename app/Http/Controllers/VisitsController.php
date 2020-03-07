@@ -12,6 +12,7 @@ use App\Visit;
 use App\Location;
 use App\Rate;
 use Response;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
@@ -45,6 +46,19 @@ class VisitsController extends Controller
         $rates=Rate::all();
         $notes=VisitNote::all();
         return view('patient_dash/history')->with('doctors',$doctors)->with('rates',$rates)->with('methods',$methods)->with('types',$types)->with('visits',$visits)->with('notes',$notes);
+    }
+    public function statistics($id)
+    {
+        $visit=DB::table('visits')->select('*')->where('d_id','=',$id)->get();
+        $visits=count($visit);
+        $lastm=Visit::where('date', '<=', Carbon::now()->subMonth())->where('d_id','=',$id)->get();
+        $last=count($lastm);
+        $nextm=Visit::where('date', '>=', Carbon::now()->subMonth())->where('d_id','=',$id)->get();
+        $next=count($nextm);
+        $total=count($visit)*300;
+        $lastearn=count($lastm)*300;
+        $nextearn=count($nextm)*300;
+        return view('doctor_dash/statistics')->with('next',$next)->with('total',$total)->with('last',$last)->with('visits',$visits)->with('lastearn',$lastearn)->with('nextearn',$nextearn);
     }
     public function index_api()
     {

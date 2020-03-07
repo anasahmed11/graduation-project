@@ -49,7 +49,8 @@
                                 @endforeach
                                 <td>{{ $visit->date }}</td>
                                 <td>{{ $visit->time }}</td>
-                                <td><button class="notes btn  btn-primary"  data-toggle="modal" data-target="#notes" data-id="{{ $visit->id }}" >notes</button><br>
+                                <td><button class="notes btn  btn-primary"  data-toggle="modal" data-target="#notes"
+                                            data-id="{{ $visit->id }}" >notes</button><br>
 
                             </tr>
                         @endif
